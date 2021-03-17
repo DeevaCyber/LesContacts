@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 public class AddActivity extends AppCompatActivity {
 
-    EditText title_input, author_input, pages_input;
+    EditText nom_input, prenom_input, telephone_input;
     Button add_button;
 
     @Override
@@ -17,17 +17,17 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        title_input = findViewById(R.id.title_input);
-        author_input = findViewById(R.id.author_input);
-        pages_input = findViewById(R.id.pages_input);
+        nom_input = findViewById(R.id.nom_input);
+        prenom_input = findViewById(R.id.prenom_input);
+        telephone_input = findViewById(R.id.telephone_input);
         add_button = findViewById(R.id.add_button);
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(AddActivity.this);
-                myDB.addBook(title_input.getText().toString().trim(),
-                        author_input.getText().toString().trim(),
-                        Integer.valueOf(pages_input.getText().toString().trim()));
+                myDB.addBook(nom_input.getText().toString().trim(),
+                        prenom_input.getText().toString().trim(),
+                        Integer.valueOf(telephone_input.getText().toString().trim()));
             }
         });
     }

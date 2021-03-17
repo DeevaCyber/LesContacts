@@ -14,19 +14,19 @@ import android.widget.Toast;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    EditText title_input, author_input, pages_input;
+    EditText nom_input, prenom_input, telephone_input;
     Button update_button, delete_button;
 
-    String id, title, author, pages;
+    String id, nom, prenom, telephone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
-        title_input = findViewById(R.id.title_input2);
-        author_input = findViewById(R.id.author_input2);
-        pages_input = findViewById(R.id.pages_input2);
+        nom_input = findViewById(R.id.nom_input2);
+        prenom_input = findViewById(R.id.prenom_input2);
+        telephone_input = findViewById(R.id.telephone_input2);
         update_button = findViewById(R.id.update_button);
         delete_button = findViewById(R.id.delete_button);
 
@@ -36,7 +36,7 @@ public class UpdateActivity extends AppCompatActivity {
         //Set actionbar title after getAndSetIntentData method
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
-            ab.setTitle(title);
+            ab.setTitle(nom);
         }
 
         update_button.setOnClickListener(new View.OnClickListener() {
@@ -44,10 +44,10 @@ public class UpdateActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //And only then we call this
                 MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateActivity.this);
-                title = title_input.getText().toString().trim();
-                author = author_input.getText().toString().trim();
-                pages = pages_input.getText().toString().trim();
-                myDB.updateData(id, title, author, pages);
+                nom = nom_input.getText().toString().trim();
+                prenom = prenom_input.getText().toString().trim();
+                telephone = telephone_input.getText().toString().trim();
+                myDB.updateData(id, nom, prenom, telephone);
             }
         });
         delete_button.setOnClickListener(new View.OnClickListener() {
@@ -60,29 +60,29 @@ public class UpdateActivity extends AppCompatActivity {
     }
 
     void getAndSetIntentData(){
-        if(getIntent().hasExtra("id") && getIntent().hasExtra("title") &&
-                getIntent().hasExtra("author") && getIntent().hasExtra("pages")){
+        if(getIntent().hasExtra("id") && getIntent().hasExtra("nom") &&
+                getIntent().hasExtra("prenom") && getIntent().hasExtra("telephone")){
             //Getting Data from Intent
             id = getIntent().getStringExtra("id");
-            title = getIntent().getStringExtra("title");
-            author = getIntent().getStringExtra("author");
-            pages = getIntent().getStringExtra("pages");
+            nom = getIntent().getStringExtra("nom");
+            prenom = getIntent().getStringExtra("prenom");
+            telephone = getIntent().getStringExtra("telephone");
 
             //Setting Intent Data
-            title_input.setText(title);
-            author_input.setText(author);
-            pages_input.setText(pages);
-            Log.d("stev", title+" "+author+" "+pages);
+            nom_input.setText(nom);
+            prenom_input.setText(prenom);
+            telephone_input.setText(telephone);
+            Log.d("stev", nom+" "+prenom+" "+telephone);
         }else{
-            Toast.makeText(this, "No data.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Pas de contacts.", Toast.LENGTH_SHORT).show();
         }
     }
 
     void confirmDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Delete " + title + " ?");
-        builder.setMessage("Are you sure you want to delete " + title + " ?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        builder.setTitle("Supprimer " + nom + " ?");
+        builder.setMessage("Etes-vous sûr de vouloir supprimer " + nom + " ?");
+        builder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(UpdateActivity.this);
@@ -90,7 +90,7 @@ public class UpdateActivity extends AppCompatActivity {
                 finish();
             }
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
