@@ -17,9 +17,9 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "contact";
     private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_TITLE = "contact_nom";
-    private static final String COLUMN_AUTHOR = "contact_prenom";
-    private static final String COLUMN_PAGES = "contact_telephone";
+    private static final String COLUMN_NOM = "contact_nom";
+    private static final String COLUMN_PRENOM = "contact_prenom";
+    private static final String COLUMN_TELEPHONE = "contact_telephone";
 
     MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -30,9 +30,9 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query = "CREATE TABLE " + TABLE_NAME +
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_TITLE + " TEXT, " +
-                        COLUMN_AUTHOR + " TEXT, " +
-                        COLUMN_PAGES + " INTEGER);";
+                        COLUMN_NOM + " TEXT, " +
+                        COLUMN_PRENOM + " TEXT, " +
+                        COLUMN_TELEPHONE + " TEXT);";
         db.execSQL(query);
     }
     @Override
@@ -41,13 +41,13 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    void addBook(String nom, String prenom, int telephone){
+    void addBook(String nom, String prenom, String telephone){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(COLUMN_TITLE, nom);
-        cv.put(COLUMN_AUTHOR, prenom);
-        cv.put(COLUMN_PAGES, telephone);
+        cv.put(COLUMN_NOM, nom);
+        cv.put(COLUMN_PRENOM, prenom);
+        cv.put(COLUMN_TELEPHONE, telephone);
         long result = db.insert(TABLE_NAME,null, cv);
         if(result == -1){
             Toast.makeText(context, "Erreur lors de l'ajout", Toast.LENGTH_SHORT).show();
@@ -67,12 +67,12 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    void updateData(String row_id, String title, String author, String pages){
+    void updateData(String row_id, String nom, String prenom, String telephone){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_TITLE, title);
-        cv.put(COLUMN_AUTHOR, author);
-        cv.put(COLUMN_PAGES, pages);
+        cv.put(COLUMN_NOM, nom);
+        cv.put(COLUMN_PRENOM, prenom);
+        cv.put(COLUMN_TELEPHONE, telephone);
 
         long result = db.update(TABLE_NAME, cv, "_id=?", new String[]{row_id});
         if(result == -1){

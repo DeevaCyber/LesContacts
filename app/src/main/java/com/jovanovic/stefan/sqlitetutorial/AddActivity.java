@@ -27,7 +27,7 @@ public class AddActivity extends AppCompatActivity {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(AddActivity.this);
                 myDB.addBook(nom_input.getText().toString().trim(),
                         prenom_input.getText().toString().trim(),
-                        Integer.valueOf(telephone_input.getText().toString().trim()));
+                        telephone_input.getText().toString().trim());
             }
         });
     }
