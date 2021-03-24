@@ -25,7 +25,7 @@ public class AddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 MyDatabaseHelper myDB = new MyDatabaseHelper(AddActivity.this);
-                myDB.addBook(nom_input.getText().toString().trim(),
+                myDB.addContact(nom_input.getText().toString().trim(),
                         prenom_input.getText().toString().trim(),
                         telephone_input.getText().toString().trim());
             }
